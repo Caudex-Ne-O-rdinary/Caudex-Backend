@@ -38,7 +38,7 @@ public class Plant extends BaseEntity {
     private Double ratioY;
 
     @Column(name = "scale", nullable = false)
-    private Double scale;
+    private Integer scale;
 
     @Column(name = "management_tip", nullable = false)
     private String managementTip;
