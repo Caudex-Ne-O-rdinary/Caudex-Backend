@@ -11,6 +11,8 @@ import hackerton.caudex.domain.garden.repository.GardenParticipantRepository;
 import hackerton.caudex.domain.garden.repository.GardenRepository;
 import hackerton.caudex.domain.garden.repository.TemplateRepository;
 import hackerton.caudex.domain.plant.entity.Plant;
+import hackerton.caudex.domain.plant.exception.PlantException;
+import hackerton.caudex.domain.plant.exception.code.PlantErrorCode;
 import hackerton.caudex.domain.plant.repository.PlantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -121,7 +123,23 @@ public class GardenService {
                 .build();
     }
 
-    public GardenResDto.PlantBatchDto movePlant(GardenReqDto.MovePlant dto){
-        Optional<Plant> byId = plantRepository.findById(dto.plantId());
+    /***
+     * 식물 배치 정보를 업데이트 한다.
+     * @param dto
+     * @return
+     */
+    public GardenResDto.PlantBatchDto movePlant(String gardenUuid, GardenReqDto.MovePlant dto){
+
+        gardenRepository.findByUuid(gardenUuid)
+                .orElseThrow(() -> new GardenException(GardenErrorCode.GARDEN_NOT_FOUND));
+
+        Plant plant = plantRepository.findById(dto.plantId())
+                .orElseThrow(() -> new PlantException(PlantErrorCode.NOT_FOUND));
+
+        plant.updatePosition(dto.ratioX(), dto.ratioY());
+
+        return GardenResDto.PlantBatchDto.builder()
+                .modifiedAt(LocalDateTime.now())
+                .build();
     }
 }

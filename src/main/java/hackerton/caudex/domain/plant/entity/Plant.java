@@ -35,4 +35,9 @@ public class Plant extends BaseEntity {
 
     @Column(name = "management_tip", nullable = false)
     private String managementTip;
+
+    public void updatePosition(Double ratioX, Double ratioY){
+        this.ratioX = ratioX;
+        this.ratioY = ratioY;
+    }
 }
