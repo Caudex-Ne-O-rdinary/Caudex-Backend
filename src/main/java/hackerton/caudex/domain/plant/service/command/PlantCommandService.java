@@ -29,6 +29,7 @@ public class PlantCommandService {
                 .managementTip(dto.managementTip())
                 .ratioX(dto.ratioX())
                 .ratioY(dto.ratioY())
+                .scale(dto.scale())
                 .imageUrl(uploadedImageUrl)
                 .build();
 
