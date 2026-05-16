@@ -22,10 +22,12 @@ public class PlantController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<PlantResDTO.PlantUploadDTO> uploadPlant(
+            @RequestHeader("X-Device-UID") String deviceUid,
+            @RequestHeader("X-OS-Type") String osType,
             @RequestPart("image") MultipartFile image,
             @RequestPart("dto") @Valid PlantReqDTO.PlantUploadDTO dto
             ) {
-        PlantResDTO.PlantUploadDTO response = plantCommandService.uploadPlant(image, dto);
+        PlantResDTO.PlantUploadDTO response = plantCommandService.uploadPlant(deviceUid, image, dto);
         return ApiResponse.onSuccess(PlantSuccessCode.CREATE_PLANT_SUCCESS, response);
     }
 

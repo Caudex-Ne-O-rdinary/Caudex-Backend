@@ -7,6 +7,6 @@ public class DiaryReqDto {
     // 다이어리 생성
     @Builder
     public record CreateDiary(
-            String context
+            String content
     ){}
 }
