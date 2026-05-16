@@ -14,10 +14,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/plants")
 @RequiredArgsConstructor
-public class DiaryController {
+public class DiaryController implements DiaryControllerDocs{
 
     private final DiaryService diaryService;
 
+    /***
+     * 다이어리를 작성한다.
+     * @param plantId
+     * @param dto
+     * @return
+     */
     @Operation(description = "다이어리 생성 API")
     @PostMapping("/{plantId}/diary")
     public ApiResponse<DiaryResDto.CreateDiaryRes> createDiary(
