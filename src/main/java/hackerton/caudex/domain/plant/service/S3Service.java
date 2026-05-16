@@ -1,7 +1,7 @@
 package hackerton.caudex.domain.plant.service;
 
 import hackerton.caudex.domain.plant.exception.PlantException;
-import hackerton.caudex.global.apiPayload.exception.code.PlantErrorCode;
+import hackerton.caudex.domain.plant.exception.code.PlantErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
