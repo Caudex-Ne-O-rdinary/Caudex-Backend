@@ -6,6 +6,7 @@ import hackerton.caudex.domain.plant.service.command.PlantCommandService;
 import hackerton.caudex.domain.plant.service.query.PlantQueryService;
 import hackerton.caudex.global.apiPayload.ApiResponse;
 import hackerton.caudex.domain.plant.exception.code.PlantSuccessCode;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class PlantController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<PlantResDTO.PlantUploadDTO> uploadPlant(
             @RequestPart("image") MultipartFile image,
-            @RequestPart("dto") PlantReqDTO.PlantUploadDTO dto
+            @RequestPart("dto") @Valid PlantReqDTO.PlantUploadDTO dto
             ) {
         PlantResDTO.PlantUploadDTO response = plantCommandService.uploadPlant(image, dto);
         return ApiResponse.onSuccess(PlantSuccessCode.CREATE_PLANT_SUCCESS, response);
