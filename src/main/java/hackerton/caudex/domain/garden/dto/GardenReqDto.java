@@ -13,22 +13,22 @@ public class GardenReqDto {
         @Size(max = 4, message = "닉네임은 최대 4자까지 입력 가능합니다.")
         String name,
 
-        @NotNull
+        @NotNull(message = "템플릿 ID는 null일 수 없습니다.")
         Long templateId
     ){}
 
     // 식물 옮기기 요청
     public record MovePlant(
-            @NotNull
+            @NotNull(message = "식물ID는 null일 수 없습니다.")
             Long plantId,
 
-            @NotNull
+            @NotNull(message = "x 좌표는 null일 수 없습니다.")
             Double ratioX,
 
-            @NotNull
+            @NotNull(message = "y 좌표는 null일 수 없습니다.")
             Double ratioY,
 
-            @NotNull
+            @NotNull(message = "scale은 null일 수 없습니다.")
             Integer scale
     ){}
 

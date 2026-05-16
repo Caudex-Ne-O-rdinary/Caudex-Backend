@@ -69,7 +69,7 @@ public class GardenController implements GardenControllerDocs{
     @PatchMapping("/{gardenUuid}")
     public ApiResponse<GardenResDto.PlantBatchDto> movePlant(
             @PathVariable String gardenUuid,
-            @RequestBody GardenReqDto.MovePlant dto
+            @RequestBody @Valid GardenReqDto.MovePlant dto
     ){
         BaseSuccessCode successCode = PlantSuccessCode.CREATED;
         return ApiResponse.onSuccess(successCode, gardenService.movePlant(gardenUuid, dto));
