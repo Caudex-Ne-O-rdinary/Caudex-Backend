@@ -148,7 +148,7 @@ public class GardenService {
      * @param gardenUuid
      * @param dto
      */
-    public void joinGardenParticipant(String deviceUid, String gardenUuid, GardenReqDto.JoinGardenReq dto){
+    public void joinGardenParticipant(String gardenUuid, String deviceUid, GardenReqDto.JoinGardenReq dto){
 
         Garden garden = gardenRepository.findByUuid(gardenUuid)
                 .orElseThrow(() -> new GardenException(GardenErrorCode.GARDEN_NOT_FOUND));
