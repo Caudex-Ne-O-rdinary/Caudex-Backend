@@ -22,10 +22,4 @@ public class Garden extends BaseEntity {
 
     @Column(name="uuid", length=36, nullable = false)
     private String uuid;
-
-    @Column(name="name", length=100, nullable = false)
-    private String name;
-
-    @Column(name = "canvas_data", columnDefinition = "LONGTEXT", nullable = false)
-    private String canvasData;
 }
