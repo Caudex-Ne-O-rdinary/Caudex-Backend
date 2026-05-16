@@ -29,7 +29,7 @@ public class GardenReqDto {
             Double ratioY,
 
             @NotNull
-            Double scale
+            Integer scale
     ){}
 
     // 초대 링크로 정원 참여 시 닉네임 입력

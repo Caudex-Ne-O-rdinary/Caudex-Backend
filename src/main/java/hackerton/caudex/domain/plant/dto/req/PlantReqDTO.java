@@ -14,6 +14,6 @@ public class PlantReqDTO {
         @NotNull(message="식물의 Y 좌표는 반드시 존재해야 합니다.")
         Double ratioY,
         @NotNull(message="식물의 크기는 반드시 존재해야 합니다.")
-        Double scale
+        Integer scale
     ) {}
 }
