@@ -43,6 +43,8 @@ public interface PlantControllerDocs {
             )
     })
     ApiResponse<PlantResDTO.PlantUploadDTO> uploadPlant(
+            @Parameter(description = "기기 고유 식별자", required = true) String deviceUid,
+            @Parameter(description = "운영체제 타입 (예: ios, android)", required = true) String osType,
             @Parameter(description = "업로드할 식물 이미지 파일", required = true) MultipartFile image,
             @Parameter(description = "식물 등록 정보 (이름, 관리 팁 등)", required = true) PlantReqDTO.PlantUploadDTO dto
     );
