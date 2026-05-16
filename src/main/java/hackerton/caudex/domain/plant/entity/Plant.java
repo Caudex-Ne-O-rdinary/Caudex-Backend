@@ -1,9 +1,13 @@
 package hackerton.caudex.domain.plant.entity;
 
+import hackerton.caudex.domain.diary.entity.Diary;
 import hackerton.caudex.domain.garden.entity.GardenParticipant;
 import hackerton.caudex.global.baseEntity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -18,7 +22,7 @@ public class Plant extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "garden_participant")
+    @JoinColumn(name = "garden_participant", nullable = false)
     private GardenParticipant gardenParticipant;
 
     @Column(name = "name", nullable = false)
@@ -35,4 +39,7 @@ public class Plant extends BaseEntity {
 
     @Column(name = "management_tip", nullable = false)
     private String managementTip;
+
+    @OneToMany(mappedBy = "plant")
+    private List<Diary> diaries = new ArrayList<>();
 }
