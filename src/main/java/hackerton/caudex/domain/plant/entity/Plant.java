@@ -25,5 +25,14 @@ public class Plant extends BaseEntity {
     private String name;
 
     @Column(name = "image_url", nullable = false)
-    private String image_url;
+    private String imageUrl;
+
+    @Column(name = "ratio_x", nullable = false)
+    private Double ratioX;
+
+    @Column(name = "ratio_y", nullable = false)
+    private Double ratioY;
+
+    @Column(name = "management_tip", nullable = false)
+    private String managementTip;
 }
