@@ -24,6 +24,9 @@ public class GardenReqDto {
             Double ratioX,
 
             @NotNull
-            Double ratioY
+            Double ratioY,
+
+            @NotNull
+            Double scale
     ){}
 }

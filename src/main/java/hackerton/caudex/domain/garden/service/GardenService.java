@@ -112,6 +112,7 @@ public class GardenService {
                         .plantId(plant.getId())
                         .ratioX(plant.getRatioX())
                         .ratioY(plant.getRatioY())
+                        .scale(plant.getScale())
                         .plantUrl(plant.getImageUrl())
                         .build())
                 .toList();
