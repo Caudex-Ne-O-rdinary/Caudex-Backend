@@ -142,4 +142,24 @@ public class GardenService {
                 .modifiedAt(LocalDateTime.now())
                 .build();
     }
+
+    /***
+     * 방 참여하기
+     * @param deviceUid
+     * @param gardenUuid
+     * @param dto
+     */
+    public void joinGardenParticipant(String deviceUid, String gardenUuid, GardenReqDto.JoinGardenReq dto){
+
+        Garden garden = gardenRepository.findByUuid(gardenUuid)
+                .orElseThrow(() -> new GardenException(GardenErrorCode.GARDEN_NOT_FOUND));
+
+        GardenParticipant participant = GardenParticipant.builder()
+                .garden(garden)
+                .uuid(deviceUid)
+                .nickname(dto.name())
+                .build();
+
+        gardenParticipantRepository.save(participant);
+    }
 }
