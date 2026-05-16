@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.cmc.caudex",
+      "sha256_cert_fingerprints": [
+        "27:38:FF:FE:A3:71:9E:E0:63:BD:1E:DD:91:E6:92:F3:38:B3:7B:72:AE:08:DF:E8:52:AD:D9:72:AF:D7:1D:79"
+      ]
+    }
+  }
+]
