@@ -14,4 +14,16 @@ public class GardenReqDto {
         @NotNull
         Long templateId
     ){}
+
+    // 식물 옮기기 요청
+    public record MovePlant(
+            @NotNull
+            Long plantId,
+
+            @NotNull
+            Double ratioX,
+
+            @NotNull
+            Double ratioY
+    ){}
 }

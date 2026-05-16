@@ -44,4 +44,17 @@ public class GardenController {
         BaseSuccessCode successCode = GardenSuccessCode.CREATED;
         return ApiResponse.onSuccess(successCode, gardenService.createGarden(deviceUid, dto));
     }
+
+    /***
+     * 생성된 정원을 조회하는 기능
+     * @param gardenUuid
+     * @return
+     */
+    @GetMapping("/{gardenUuid}")
+    public ApiResponse<GardenResDto.GetGarden> getGarden(
+            @PathVariable String gardenUuid
+    ){
+        BaseSuccessCode successCode = GardenSuccessCode.OK_2;
+        return ApiResponse.onSuccess(successCode, gardenService.joinGarden(gardenUuid));
+    }
 }
