@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 
@@ -134,7 +133,7 @@ public class GardenService {
                 .orElseThrow(() -> new GardenException(GardenErrorCode.GARDEN_NOT_FOUND));
 
         Plant plant = plantRepository.findById(dto.plantId())
-                .orElseThrow(() -> new PlantException(PlantErrorCode.NOT_FOUND));
+                .orElseThrow(() -> new PlantException(PlantErrorCode.PLANT_NOT_FOUND));
 
         plant.updatePosition(dto.ratioX(), dto.ratioY());
 

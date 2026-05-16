@@ -71,7 +71,7 @@ public class GardenController {
             @PathVariable String gardenUuid,
             @RequestBody GardenReqDto.MovePlant dto
     ){
-        BaseSuccessCode successCode = PlantSuccessCode.OK;
+        BaseSuccessCode successCode = PlantSuccessCode.CREATED;
         return ApiResponse.onSuccess(successCode, gardenService.movePlant(gardenUuid, dto));
     }
 
