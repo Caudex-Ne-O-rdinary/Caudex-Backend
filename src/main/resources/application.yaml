@@ -1,6 +1,9 @@
 spring:
   application:
     name: "caudex"
+  servlet:
+    multipart:
+      max-file-size: 10MB
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver # MySQL JDBC 드라이버 클래스 이름
