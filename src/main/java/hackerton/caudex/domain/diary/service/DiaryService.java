@@ -28,7 +28,7 @@ public class DiaryService {
                 .orElseThrow(() -> new PlantException(PlantErrorCode.PLANT_NOT_FOUND));
 
         Diary diary = Diary.builder()
-                .content(dto.context())
+                .content(dto.content())
                 .plant(plant)
                 .build();
 
