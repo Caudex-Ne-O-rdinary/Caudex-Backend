@@ -25,7 +25,7 @@ public class DiaryService {
     public DiaryResDto.CreateDiaryRes createDiary(Long plantId, DiaryReqDto.CreateDiary dto){
 
         Plant plant = plantRepository.findById(plantId)
-                .orElseThrow(() -> new PlantException(PlantErrorCode.NOT_FOUND));
+                .orElseThrow(() -> new PlantException(PlantErrorCode.PLANT_NOT_FOUND));
 
         Diary diary = Diary.builder()
                 .content(dto.context())
