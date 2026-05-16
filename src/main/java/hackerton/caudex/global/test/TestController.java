@@ -1,5 +1,8 @@
 package hackerton.caudex.global.test;
 
+import hackerton.caudex.global.apiPayload.ApiResponse;
+import hackerton.caudex.global.apiPayload.code.BaseSuccessCode;
+import hackerton.caudex.global.apiPayload.code.GeneralSuccessCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping
-    public ResponseEntity<String> UuidController(
+    public ApiResponse<String> UuidController(
             @RequestHeader(value = "X-Device-UID") String deviceUid,
             @RequestHeader(value = "X-OS-Type") String osType
     ){
         String responseBody = String.format("Device UID: %s, OS Type: %s", deviceUid, osType);
+        BaseSuccessCode code = GeneralSuccessCode.OK;
 
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(responseBody);
+        return ApiResponse.onSuccess(code, responseBody);
     }
 }
