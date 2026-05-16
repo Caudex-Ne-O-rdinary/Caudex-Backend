@@ -7,6 +7,7 @@ import hackerton.caudex.domain.garden.service.GardenService;
 import hackerton.caudex.domain.plant.exception.code.PlantSuccessCode;
 import hackerton.caudex.global.apiPayload.ApiResponse;
 import hackerton.caudex.global.apiPayload.code.BaseSuccessCode;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +40,7 @@ public class GardenController {
     public ApiResponse<GardenResDto.SuccessCreateRes> createGarden(
             @RequestHeader("X-Device-UID") String deviceUid,
             @RequestHeader("X-OS-Type") String osType,
-            @RequestBody GardenReqDto.CreateGardenReq dto
+            @RequestBody @Valid GardenReqDto.CreateGardenReq dto
 
     ){
         BaseSuccessCode successCode = GardenSuccessCode.CREATED;
@@ -59,6 +60,12 @@ public class GardenController {
         return ApiResponse.onSuccess(successCode, gardenService.joinGarden(gardenUuid));
     }
 
+    /***
+     * 정원 내 식물 위치 옮기는 기능
+     * @param gardenUuid
+     * @param dto
+     * @return
+     */
     @PatchMapping("/{gardenUuid}")
     public ApiResponse<GardenResDto.PlantBatchDto> movePlant(
             @PathVariable String gardenUuid,
@@ -67,4 +74,24 @@ public class GardenController {
         BaseSuccessCode successCode = PlantSuccessCode.CREATED;
         return ApiResponse.onSuccess(successCode, gardenService.movePlant(gardenUuid, dto));
     }
+
+    /***
+     * 초대 링크를 받고, 닉네임을 입력하는 기능
+     * @param gardenUuid
+     * @param deviceUid
+     * @param dto
+     * @return
+     */
+    @PostMapping("/{gardenUuid}/join")
+    public ApiResponse<String> joinGarden(
+            @PathVariable String gardenUuid,
+            @RequestHeader(value = "X-Device-UID") String deviceUid,
+            @RequestBody @Valid GardenReqDto.JoinGardenReq dto
+    ){
+        gardenService.joinGardenParticipant(gardenUuid, deviceUid, dto);
+        BaseSuccessCode successCode = GardenSuccessCode.OK;
+        return ApiResponse.onSuccess(successCode, "정원에 성공적으로 참여했습니다.");
+    }
+
+
 }

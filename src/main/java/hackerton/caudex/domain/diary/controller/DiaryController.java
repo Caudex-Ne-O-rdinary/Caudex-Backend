@@ -6,6 +6,7 @@ import hackerton.caudex.domain.diary.exception.code.DiarySuccessCode;
 import hackerton.caudex.domain.diary.service.DiaryService;
 import hackerton.caudex.global.apiPayload.ApiResponse;
 import hackerton.caudex.global.apiPayload.code.BaseSuccessCode;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class DiaryController {
     @PostMapping("/{plantId}/diary")
     public ApiResponse<DiaryResDto.CreateDiaryRes> createDiary(
             @PathVariable Long plantId,
-            @RequestBody DiaryReqDto.CreateDiary dto
+            @RequestBody @Valid DiaryReqDto.CreateDiary dto
     ){
         BaseSuccessCode successCode = DiarySuccessCode.CREATED;
         return ApiResponse.onSuccess(successCode, diaryService.createDiary(plantId, dto));
