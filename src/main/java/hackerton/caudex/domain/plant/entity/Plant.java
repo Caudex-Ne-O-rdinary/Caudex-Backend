@@ -42,4 +42,9 @@ public class Plant extends BaseEntity {
 
     @OneToMany(mappedBy = "plant")
     private List<Diary> diaries = new ArrayList<>();
+  
+    public void updatePosition(Double ratioX, Double ratioY){
+        this.ratioX = ratioX;
+        this.ratioY = ratioY;
+    }
 }

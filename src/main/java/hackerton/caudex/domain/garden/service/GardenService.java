@@ -10,12 +10,17 @@ import hackerton.caudex.domain.garden.exception.code.GardenErrorCode;
 import hackerton.caudex.domain.garden.repository.GardenParticipantRepository;
 import hackerton.caudex.domain.garden.repository.GardenRepository;
 import hackerton.caudex.domain.garden.repository.TemplateRepository;
+import hackerton.caudex.domain.plant.entity.Plant;
+import hackerton.caudex.domain.plant.exception.PlantException;
+import hackerton.caudex.domain.plant.exception.code.PlantErrorCode;
+import hackerton.caudex.domain.plant.repository.PlantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -27,6 +32,7 @@ public class GardenService {
     private final GardenRepository gardenRepository;
     private final GardenParticipantRepository gardenParticipantRepository;
     private final TemplateRepository templateRepository;
+    private final PlantRepository plantRepository;
 
     /***
      * 함수 기능: 정원 생성 화면 조회
@@ -87,13 +93,53 @@ public class GardenService {
                 .build();
     }
 
-//    public GardenResDto.GetGarden joinGarden(String gardenUuid){
-//
-//        Garden garden = gardenRepository.findByUuid(gardenUuid)
-//                .orElseThrow(() -> new GardenException(GardenErrorCode.GARDEN_NOT_FOUND));
-//
-//        String templateUrl = garden.getTemplate().getImageUrl();
-//
-//        // 해당 정원에 심어진 모든 식물 조회
-//    }
+    /***
+     * 생성된 정원을 조회한다.
+     * @param gardenUuid
+     * @return
+     */
+    public GardenResDto.GetGarden joinGarden(String gardenUuid){
+
+        Garden garden = gardenRepository.findByUuid(gardenUuid)
+                .orElseThrow(() -> new GardenException(GardenErrorCode.GARDEN_NOT_FOUND));
+
+        String templateUrl = garden.getTemplate().getImageUrl();
+
+        // 해당 정원에 심어진 모든 식물 조회
+        List<Plant> plants = plantRepository.findAllByGardenParticipant_Garden(garden);
+
+        List<GardenResDto.PlantDto> plantDtos = plants.stream()
+                .map(plant -> GardenResDto.PlantDto.builder()
+                        .plantId(plant.getId())
+                        .ratioX(plant.getRatioX())
+                        .ratioY(plant.getRatioY())
+                        .plantUrl(plant.getImageUrl())
+                        .build())
+                .toList();
+
+        return GardenResDto.GetGarden.builder()
+                .templateUrl(templateUrl)
+                .plants(plantDtos)
+                .build();
+    }
+
+    /***
+     * 식물 배치 정보를 업데이트 한다.
+     * @param dto
+     * @return
+     */
+    public GardenResDto.PlantBatchDto movePlant(String gardenUuid, GardenReqDto.MovePlant dto){
+
+        gardenRepository.findByUuid(gardenUuid)
+                .orElseThrow(() -> new GardenException(GardenErrorCode.GARDEN_NOT_FOUND));
+
+        Plant plant = plantRepository.findById(dto.plantId())
+                .orElseThrow(() -> new PlantException(PlantErrorCode.NOT_FOUND));
+
+        plant.updatePosition(dto.ratioX(), dto.ratioY());
+
+        return GardenResDto.PlantBatchDto.builder()
+                .modifiedAt(LocalDateTime.now())
+                .build();
+    }
 }

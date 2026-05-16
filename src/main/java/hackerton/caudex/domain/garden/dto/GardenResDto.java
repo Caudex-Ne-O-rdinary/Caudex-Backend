@@ -43,4 +43,10 @@ public class GardenResDto {
             Double ratioY,
             String plantUrl
     ){}
+
+    // 정원 식물 수정 응답
+    @Builder
+    public record PlantBatchDto(
+            LocalDateTime modifiedAt
+    ){}
 }
