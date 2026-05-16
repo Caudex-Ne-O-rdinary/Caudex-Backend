@@ -41,6 +41,7 @@ public class GardenResDto {
             Long plantId,
             Double ratioX,
             Double ratioY,
+            Double scale,
             String plantUrl
     ){}
 
