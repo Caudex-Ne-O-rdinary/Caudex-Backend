@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/gardens")
-public class GardenController {
+public class GardenController implements GardenControllerDocs{
 
     private final GardenService gardenService;
 
