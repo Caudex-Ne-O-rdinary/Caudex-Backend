@@ -1,5 +1,6 @@
 package hackerton.caudex.domain.garden.entity;
 
+import hackerton.caudex.global.baseEntity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
